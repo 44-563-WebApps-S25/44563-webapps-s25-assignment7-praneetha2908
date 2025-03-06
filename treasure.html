@@ -151,6 +151,42 @@
     }
 
     document.getElementById('helpButton').onclick = help;
+    const boardSize = 35;
+        const gameBoard = document.getElementById("gameBoard");
+       
+        let snakePosition = Math.floor(Math.random() * boardSize);
+        let silverPosition = Math.floor(Math.random() * boardSize);
+        let goldPosition = Math.floor(Math.random() * boardSize);
+ 
+        while (silverPosition === snakePosition) silverPosition = Math.floor(Math.random() * boardSize);
+        while (goldPosition === snakePosition || goldPosition === silverPosition) goldPosition = Math.floor(Math.random() * boardSize);
+        function createBoard() {
+            for (let i = 0; i < boardSize; i++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+                if (i === snakePosition) cell.classList.add("snake");
+                else if (i === silverPosition) cell.classList.add("silver");
+                else if (i === goldPosition) cell.classList.add("gold");
+ 
+                cell.addEventListener("click", () => moveSnake(i));
+                gameBoard.appendChild(cell);
+            }
+        }
+        function moveSnake(currentPosition) {
+            const cells = document.querySelectorAll(".cell");
+            snakePosition = (snakePosition + 6) % boardSize;
+            if (snakePosition === silverPosition) {
+                alert("Game Over! You landed on the snake!");
+                return;
+            }
+            if (snakePosition === goldPosition) {
+                alert("You win! You found the treasure!");
+                return;
+            }
+            cells.forEach(cell => cell.classList.remove("snake"));
+            cells[snakePosition].classList.add("snake");
+        }
+        createBoard();
 </script>
 
 </body>

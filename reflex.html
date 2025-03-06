@@ -76,6 +76,25 @@
             }, 5000);
           }
         document.getElementById('goButton').onclick = beginTime;
+        document.getElementById("startButton").addEventListener("click", startCountdown);
+ 
+        function startCountdown() {
+            const randomStart = Math.floor(Math.random() * 9) + 2;
+            let countdown = randomStart;
+ 
+            const countdownDisplay = document.getElementById("countdown");
+            countdownDisplay.innerHTML = countdown;
+ 
+            const interval = setInterval(() => {
+                countdown--;
+                countdownDisplay.innerHTML = countdown;
+ 
+                if (countdown === 0) {
+                    clearInterval(interval);
+                    alert("Time's up!");
+                }
+            }, 1000);
+        }
   </script>
 
 </body>

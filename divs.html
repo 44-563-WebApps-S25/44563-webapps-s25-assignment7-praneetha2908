@@ -92,7 +92,16 @@
         addEndButton.addEventListener('click', addItemEnd);
         addFrontButton.addEventListener('click', addItemFront);
         removeButton.addEventListener('click', removeItem);
-
+		const promoteButton = document.getElementById("promoteButton");
+        promoteButton.addEventListener("click", promoteItem);
+        function promoteItem() {
+            const divListItems = document.getElementsByClassName("divlist");
+            if (divListItems.length > 1) {
+                const randomIndex = Math.floor(Math.random() * (divListItems.length - 1)) + 1;
+                const selectedItem = divListItems[randomIndex];
+                flexContainer.insertBefore(selectedItem, divListItems[0]);
+            }
+        }
 </script>
 </body>
 </html>	
