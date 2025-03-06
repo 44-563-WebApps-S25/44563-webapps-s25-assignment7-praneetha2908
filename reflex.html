@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praneetha Reflexes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #target, #counter {
+            font-size: 24px;
+            margin: 20px;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        #goButton {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #goButton:hover {
+            background-color: #45a049;
+        }
+        #haltButton {
+            background-color: #f44336;
+            color: white;
+        }
+        #haltButton:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Praneetha's Reflexes</h1>
+    <div id="target">Your time</div>
+    <div id="counter">Count</div>
+    <button id="goButton">Go</button>
+    <button id="haltButton">Halt</button>
+ 
+    <script>
+        let haltTime;
+        let countdownRunning = false;
+        function recordTime() {
+            haltTime = Date.now();
+            console.log("Halt time recorded at: " + haltTime);
+        }
+        document.getElementById('haltButton').onclick = recordTime;
+        function beginTime() {
+            if (countdownRunning) return;
+            countdownRunning = true;
+            let count = 5;  
+            for (let i = 0; i <= 5; i++) {
+                setTimeout(function() {
+                    document.getElementById('counter').innerHTML = i;
+                }, i * 1000);
+            }
+            setTimeout(function() {
+                if (haltTime === undefined) {
+                    document.getElementById('target').innerHTML = "Not soon enough";
+                } else {
+                    let targetTime = Date.now();
+                    let elapsedTime = targetTime - haltTime;
+                    let elapsedSeconds = Math.abs(Math.round(elapsedTime / 1000));
+                    document.getElementById('target').innerHTML = "Time was " + elapsedSeconds + " seconds";
+                }
+                countdownRunning = false;
+            }, 5000);
+          }
+        document.getElementById('goButton').onclick = beginTime;
+  </script>
+
+</body>
+</html>
