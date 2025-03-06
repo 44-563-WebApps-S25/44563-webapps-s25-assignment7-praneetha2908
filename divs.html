@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praneetha Builds List with Divs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #flex-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .divlist {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        input[type="text"] {
+            font-size: 16px;
+            padding: 8px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+ 
+    <h1>Praneetha Builds List with Divs</h1>
+    <input type="text" id="inputText" placeholder="Enter item" />
+    <br />
+    <button id="addEndButton">Add end</button>
+    <button id="addFrontButton">Add front</button>
+    <button id="removeButton">Remove</button>
+    <div id="flex-container">
+        <div class="divlist">Item 1</div>
+        <div class="divlist">Item 2</div>
+        <div class="divlist">Item 3</div>
+    </div>
+    <script>
+        const addEndButton = document.getElementById('addEndButton');
+        const addFrontButton = document.getElementById('addFrontButton');
+        const removeButton = document.getElementById('removeButton');
+        const inputText = document.getElementById('inputText');
+        const flexContainer = document.getElementById('flex-container');
+        function addItemEnd() {
+            const inputValue = inputText.value.trim();
+            if (inputValue !== "") {  
+                const newDiv = document.createElement('div');
+                newDiv.innerHTML = inputValue;  
+                newDiv.className = "divlist";  
+                flexContainer.appendChild(newDiv);
+                inputText.value = "";
+            }
+        }
+        function addItemFront() {
+            const inputValue = inputText.value.trim();
+            if (inputValue !== "") {  
+                const newDiv = document.createElement('div');
+                newDiv.innerHTML = inputValue;  
+                newDiv.className = "divlist";  
+                flexContainer.insertBefore(newDiv, flexContainer.firstChild);
+                inputText.value = "";
+            }
+        }
+        function removeItem() {
+            const divListItems = document.getElementsByClassName('divlist');
+            const length = divListItems.length;
+            if (length > 0) {
+                const middleIndex = Math.floor(length / 2);
+                flexContainer.removeChild(divListItems[middleIndex]);
+            }
+        }
+        addEndButton.addEventListener('click', addItemEnd);
+        addFrontButton.addEventListener('click', addItemFront);
+        removeButton.addEventListener('click', removeItem);
+
+</script>
+</body>
+</html>	
